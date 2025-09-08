@@ -1,3 +1,5 @@
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { ThemeProvider as EmotionThemeProvider } from "@emotion/react";
 import { DataObjectRounded, DeleteForeverRounded } from "@mui/icons-material";
 import { ThemeProvider as MuiThemeProvider, type Theme } from "@mui/material";
@@ -152,25 +154,27 @@ function App() {
           : "light",
       )}
     >
-      <EmotionThemeProvider
-        theme={{
-          primary: getMuiTheme().palette.primary.main,
-          secondary: getMuiTheme().palette.secondary.main,
-          darkmode: isDarkMode(user.darkmode, systemTheme, getMuiTheme().palette.secondary.main),
-          mui: getMuiTheme(),
-          reduceMotion: user.settings.reduceMotion || "system",
-        }}
-      >
-        <GlobalStyles />
-        <CustomToaster />
-        <ErrorBoundary>
-          <MainLayout>
-            <GlobalQuickSaveHandler>
-              <AppRouter />
-            </GlobalQuickSaveHandler>
-          </MainLayout>
-        </ErrorBoundary>
-      </EmotionThemeProvider>
+      <LocalizationProvider dateAdapter={AdapterDateFns}>
+        <EmotionThemeProvider
+          theme={{
+            primary: getMuiTheme().palette.primary.main,
+            secondary: getMuiTheme().palette.secondary.main,
+            darkmode: isDarkMode(user.darkmode, systemTheme, getMuiTheme().palette.secondary.main),
+            mui: getMuiTheme(),
+            reduceMotion: user.settings.reduceMotion || "system",
+          }}
+        >
+          <GlobalStyles />
+          <CustomToaster />
+          <ErrorBoundary>
+            <MainLayout>
+              <GlobalQuickSaveHandler>
+                <AppRouter />
+              </GlobalQuickSaveHandler>
+            </MainLayout>
+          </ErrorBoundary>
+        </EmotionThemeProvider>
+      </LocalizationProvider>
     </MuiThemeProvider>
   );
 }
