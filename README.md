@@ -44,49 +44,46 @@
 
 ## ⚡ Features
 
-### 🔗 Share Tasks by Link or QR Code
+- 🔗 **Share Tasks by Link or QR Code** → Easily share your tasks with others using a link or QR code.
+- 🎨 **Color Themes & Dark Mode** → Choose from various color themes and toggle between light and dark modes.
+- 🗣️ **Task Reading Aloud** → Read tasks aloud using the `SpeechSynthesis` API.
+- 📥 **Import/Export Tasks** → Backup and transfer tasks as JSON.
+- 📴 **Progressive Web App (PWA)** → Installable, offline support, native-like usage.
+- 🔄 **Update Prompt** → Notifies when a new version is available.
+- 📱 **Custom Splash Screens** → Native-like smooth startup screens.
+- 📅 **Smart Filters** → Filter tasks by **Today**, **This Week**, or a **custom date range**.
+- 🚨 **Task Priority Levels** → Assign **Critical**, **High**, or **Medium** priority to tasks with color-coded labels.
 
-Easily share your tasks with others using a link or QR code.
+---
 
-**[Example Link](https://react-cool-todo-app.netlify.app/share?task=N4IgJg9gdgpiBcAzAhgGwM4wDQgA4EspYwEAXAJwFdsQpkBbOeEAdRgCN19SYACAERgA3GKgi5GUUiBxgY6AMbl8uUvmgIQAYXIxkPXsl6pkUMIQDmvXMgt8A7twAWvAEp6FpAHQArdL0QIcl4FVHwYKS9eJ1JSXHR4AHpE+1SvAE8ISlJKdhgvBQh6FP0FJwB+IQBedgBZAGsoRABpAA0ASQAxAEEADgAyUiqAJgBmdH7kdgB9MtNYVCrEXRgtCDktBlwvIIsZEBh6CB98TQBGRABOMDOAWgvRxAVb4YAGV7B7xAAWdnZ9wpiciaADE7AAbMNvohEPswPomCA3sMAKy3V7fF6vAAqrzO8DOl3gr3BXleAHZRgAtOF6MBhWCaZFojEvUa4-FnXrE15k940nAKBEWILpBAAbVA+BIzFew0uwwU7GQaMQ4Jgw1u3zOCkx7BRyHJtwUKMuyFeyGQMAUiBgo32dEYmhYQXq+0Ox1OzAeGoBECBoKhvRgMJAAF8sFKZWdwb1yWdUdryd9waMyaMcI7EWtzFA9jgPSdzogDaqYK9YYL-UFQeCbsNQ2GALo4EzoUgAZWQIiZcpZmLeHPgb3go15oxR1PDQA&userName=Maciej)**
+### 📅 Task Filters
 
+Organize your tasks using built-in filters:
 
+- **Today** → Shows only tasks due today
+- **This Week** → Displays tasks due within the current week
+- **Custom Date Range** → Select a custom date range using date pickers
 
-### 🎨 Color Themes & Dark Mode
+<img src="new_screenshot/filter_show_home.png" width="500px" />
 
-Choose from various color themes and toggle between light and dark modes to suit your preferences.
+---
 
-<img src="https://raw.githubusercontent.com/maciekt07/TodoApp/main/screenshots/settings.png" width="500px" />
+### 🚨 Task Priority Levels
 
-### 🗣️ Task Reading Aloud
+While adding or editing a task, you can now assign **priority levels**:
 
-Option to have tasks read aloud using the native `SpeechSynthesis` API, with a selection of voices to choose from.
+- 🔴 **Critical** (red)
+- 🟡 **High** (yellow)
+- 🟣 **Medium** (purple)
 
-<img src="https://raw.githubusercontent.com/maciekt07/TodoApp/main/screenshots/ReadAloud.png" width="260px" alt="Task Reading Aloud" />
+Each task card displays:
 
-### 📥 Import/Export Tasks
+- A **colored circle** representing the priority
+- A **priority label** (Critical / High / Medium)
 
-Users can import and export tasks to/from JSON files. This feature allows users to back up their tasks or transfer them to other devices easily. [Example Import File](https://github.com/maciekt07/TodoApp/blob/main/example-import.json)
+<img src="new_screenshot/priority_add.png" width="500px" />
 
-### 📴 Progressive Web App (PWA)
-
-This app is a Progressive Web App (PWA), which means it can be installed on your device, **used even when you're offline** and behave like a native app with shortcuts and app badges.
-
-<img src="https://raw.githubusercontent.com/maciekt07/TodoApp/main/screenshots/pwaTaskBar.png" alt="taskbar" width="260px" />
-
-### 🔄 Update Prompt
-
-The app features a custom update prompt that notifies users when a new version is available, allowing for easy refresh to access the latest improvements.
-
-<img src="https://raw.githubusercontent.com/maciekt07/TodoApp/main/screenshots/UpdatePrompt.png" alt="update prompt" width="260px" />
-
-### 📱 Custom Splash Screens
-
-The app automatically generates custom splash screens from a single HTML template for various iOS and iPadOS devices in both light and dark modes. These splash screens provide a smooth, native-like launch experience when the app is opened as a PWA.
-
-<img src="https://raw.githubusercontent.com/maciekt07/TodoApp/main/screenshots/SplashScreen.png" alt="Splash Screen Example" width="450px" />
-
-To generate splash screens: `npm run generate-splash`
+---
 
 ## 👨‍💻 Installation
 
@@ -110,6 +107,11 @@ The app will now be running at [http://localhost:5173/](http://localhost:5173/).
 <img src="https://raw.githubusercontent.com/maciekt07/TodoApp/main/screenshots/ss3.png" width="300px" />
 
 <img src="https://raw.githubusercontent.com/maciekt07/TodoApp/main/screenshots/sspc1.png" width="650px" />
+
+<img src="new_screenshot/filter_all.png" width="650px" />
+<img src="new_screenshot/filter.jpeg" width="650px" />
+<img src="new_screenshot/priority_add.png" width="650px" />
+<img src="new_screenshot/Priority_edit.png" width="650px" />
 
 ## 🚀 Performance
 

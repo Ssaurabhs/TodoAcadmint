@@ -80,7 +80,7 @@ const TaskMenuButton = memo(
 /**
  * Component to display a list of tasks.
  */
-export const TasksList: React.FC = () => {
+export const TasksList: React.FC<{ tasks: Task[] }> = ({ tasks }) => {
   const { user, setUser } = useContext(UserContext);
   const {
     selectedTaskId,
@@ -233,7 +233,7 @@ export const TasksList: React.FC = () => {
     [search, selectedCatId, user.settings?.doneToBottom, sortOption],
   );
 
-  const orderedTasks = useMemo(() => reorderTasks(user.tasks), [user.tasks, reorderTasks]);
+  const orderedTasks = useMemo(() => reorderTasks(tasks), [tasks, reorderTasks]);
 
   const confirmDeleteTask = () => {
     if (!selectedTaskId) {

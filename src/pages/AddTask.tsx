@@ -15,6 +15,23 @@ import InputThemeProvider from "../contexts/InputThemeProvider";
 import { CategorySelect } from "../components/CategorySelect";
 import { useToasterStore } from "react-hot-toast";
 
+interface Task {
+  id: string;
+  name: string;
+  done: boolean;
+  deadline?: string;
+  priority: {
+    label: "Critical" | "High" | "Medium";
+    color: string;
+  };
+}
+
+const PRIORITY_OPTIONS = [
+  { label: "Critical", color: "#ef2522ff" }, // red
+  { label: "High", color: "#fb8823ff" }, // Orange
+  { label: "Medium", color: "#8e24aa" }, // purple
+];
+
 const AddTask = () => {
   const { user, setUser } = useContext(UserContext);
   const theme = useTheme();
@@ -28,6 +45,9 @@ const AddTask = () => {
   );
   const [deadline, setDeadline] = useStorageState<string>("", "deadline", "sessionStorage");
   const [nameError, setNameError] = useState<string>("");
+
+  const [selectedPriority, setSelectedPriority] = useState(PRIORITY_OPTIONS[2]); // default to Medium
+
   const [descriptionError, setDescriptionError] = useState<string>("");
   const [selectedCategories, setSelectedCategories] = useStorageState<Category[]>(
     [],
@@ -109,8 +129,9 @@ const AddTask = () => {
       emoji: emoji ? emoji : undefined,
       color,
       date: new Date(),
-      deadline: deadline !== "" ? new Date(deadline) : undefined,
+      deadline: deadline !== "" ? deadline : undefined,
       category: selectedCategories ? selectedCategories : [],
+      priority: selectedPriority,
     };
 
     setUser((prevUser) => ({
@@ -224,6 +245,34 @@ const AddTask = () => {
             </div>
           )}
         </InputThemeProvider>
+
+        <div style={{ marginBottom: "14px" }}>
+          <label style={{ display: "block", marginBottom: "6px", fontWeight: "bold" }}>
+            Priority
+          </label>
+          <select
+            value={selectedPriority.label}
+            onChange={(e) => {
+              const newPriority = PRIORITY_OPTIONS.find((p) => p.label === e.target.value);
+              if (newPriority) setSelectedPriority(newPriority);
+            }}
+            style={{
+              width: "400px",
+              padding: "16px",
+              borderRadius: "10px",
+              border: "0.5px solid #ccc",
+              backgroundColor: selectedPriority.color,
+              color: getFontColor(selectedPriority.color),
+            }}
+          >
+            {PRIORITY_OPTIONS.map((priority) => (
+              <option key={priority.label} value={priority.label}>
+                {priority.label}
+              </option>
+            ))}
+          </select>
+        </div>
+
         <ColorPicker
           color={color}
           width="400px"

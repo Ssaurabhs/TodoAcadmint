@@ -30,6 +30,8 @@ import { TaskContext } from "../../contexts/TaskContext";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 
+// import { PriorityBadge } from "../PriorityBadge";
+
 interface TaskItemProps {
   task: Task;
   features?: {
@@ -126,7 +128,7 @@ export const TaskItem = memo(
         )}
         {enableSelection && selectedIds.length > 0 && (
           <StyledRadio
-            clr={getFontColor(task.color)}
+            // clr={getFontColor(task.color)}
             checked={isSelected}
             icon={<RadioUnchecked />}
             checkedIcon={<RadioChecked />}
@@ -140,6 +142,7 @@ export const TaskItem = memo(
             tabIndex={0}
             role="checkbox"
             aria-checked={isSelected}
+            clr={""}
           />
         )}
 
@@ -166,6 +169,7 @@ export const TaskItem = memo(
           )}
           <TaskHeader>
             <TaskName done={task.done}>{textHighlighter(task.name)}</TaskName>
+
             <Tooltip
               title={
                 moveMode && enableMoveMode

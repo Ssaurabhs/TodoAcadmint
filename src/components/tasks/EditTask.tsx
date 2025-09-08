@@ -9,6 +9,7 @@ import {
   TextField,
   TextFieldProps,
   Tooltip,
+  MenuItem,
 } from "@mui/material";
 import { useContext, useEffect, useMemo, useState } from "react";
 import { ColorPicker, CustomDialogTitle, CustomEmojiPicker } from "..";
@@ -84,6 +85,7 @@ export const EditTask = ({ open, task, onClose }: EditTaskProps) => {
             description: editedTask.description || undefined,
             deadline: editedTask.deadline || undefined,
             category: editedTask.category || undefined,
+            priority: editedTask.priority || undefined,
             lastSave: new Date(),
           };
         }
@@ -200,6 +202,32 @@ export const EditTask = ({ open, task, onClose }: EditTaskProps) => {
                 : `${editedTask?.description?.length}/${DESCRIPTION_MAX_LENGTH}`
           }
         />
+
+        <StyledInput
+          select
+          label="Priority"
+          name="priority"
+          value={editedTask?.priority?.label || ""}
+          onChange={(e) => {
+            const value = e.target.value;
+            let priorityObj;
+
+            if (value === "Critical") priorityObj = { label: "Critical", color: "#ef2522ff" };
+            if (value === "High") priorityObj = { label: "High", color: "#fb8823ff" };
+            if (value === "Medium") priorityObj = { label: "Medium", color: "#8e24aa" };
+
+            setEditedTask((prev) => ({
+              ...(prev as Task),
+              priority: priorityObj,
+            }));
+          }}
+          margin="normal"
+        >
+          <MenuItem value="Critical">Critical</MenuItem>
+          <MenuItem value="High">High</MenuItem>
+          <MenuItem value="Medium">Medium</MenuItem>
+        </StyledInput>
+
         <StyledInput
           label="Deadline date"
           name="deadline"
