@@ -65,7 +65,7 @@ Organize your tasks using built-in filters:
 - **This Week** → Displays tasks due within the current week
 - **Custom Date Range** → Select a custom date range using date pickers
 
-<img src="new_screenshot/filter_show_home.png" width="500px" />
+<img src="new_screenshot/todo_filter_n.png" width="500px" />
 
 ---
 
@@ -119,8 +119,8 @@ The app will now be running at [http://localhost:5173/](http://localhost:5173/).
 
 <img src="https://raw.githubusercontent.com/maciekt07/TodoApp/main/screenshots/sspc1.png" width="650px" />
 
-<img src="new_screenshot/filter_all.png" width="650px" />
-<img src="new_screenshot/filter.jpeg" width="650px" />
+<img src="new_screenshot/todo_filter_n.png" width="650px" />
+<img src="new_screenshot/todo_todayfilter.jpeg" width="650px" />
 <img src="new_screenshot/priority_add.png" width="650px" />
 <img src="new_screenshot/Priority_edit.png" width="650px" />
 <img src="new_screenshot/Test_all.png" width="650px" />

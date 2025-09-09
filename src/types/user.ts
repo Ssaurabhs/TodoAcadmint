@@ -37,7 +37,10 @@ export interface User {
 /**
  * Represents a task in the application.
  */
+export type Priority = "low" | "medium" | "high";
+
 export interface Task {
+  priority: Priority;
   id: UUID;
   done: boolean;
   pinned: boolean;
