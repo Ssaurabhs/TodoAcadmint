@@ -51,8 +51,9 @@
 - 📴 **Progressive Web App (PWA)** → Installable, offline support, native-like usage.
 - 🔄 **Update Prompt** → Notifies when a new version is available.
 - 📱 **Custom Splash Screens** → Native-like smooth startup screens.
-- 📅 **Smart Filters** → Filter tasks by **Today**, **This Week**, or a **custom date range**.
+- 📅 **FilterBar** → Filter tasks by **Today**, **This Week**, or a **custom date range**.
 - 🚨 **Task Priority Levels** → Assign **Critical**, **High**, or **Medium** priority to tasks with color-coded labels.
+- 🧪 **Tests** → Added unit testing for filtersBar and PriorityBadge.
 
 ---
 
@@ -85,12 +86,22 @@ Each task card displays:
 
 ---
 
+### 🧪 Tests
+
+This project includes unit tests written with Vitest and React Testing Library.
+**To run all test cases, use:** `npm run test`
+
+<img src="new_screenshot/Test_filter.png" width="500px" />
+<img src="new_screenshot/Test_Priority.png" width="500px" />
+
+---
+
 ## 👨‍💻 Installation
 
 To install and run the project locally, follow these steps:
 
-- Clone the repository: `git clone https://github.com/maciekt07/TodoApp.git`
-- Navigate to the project directory: `cd TodoApp`
+- Clone the repository: `git clone https://github.com/Ssaurabhs/TodoAcadmint`
+- Navigate to the project directory: `cd TodoAcadmint`
 - Install the dependencies: `npm install`
 - Start the development server: `npm run dev`
 
@@ -112,6 +123,7 @@ The app will now be running at [http://localhost:5173/](http://localhost:5173/).
 <img src="new_screenshot/filter.jpeg" width="650px" />
 <img src="new_screenshot/priority_add.png" width="650px" />
 <img src="new_screenshot/Priority_edit.png" width="650px" />
+<img src="new_screenshot/Test_all.png" width="650px" />
 
 ## 🚀 Performance
 
