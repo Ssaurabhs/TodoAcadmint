@@ -2,7 +2,7 @@ import { useRef, memo, useContext } from "react";
 import { Emoji } from "emoji-picker-react";
 import { DoneRounded, PushPinRounded, Link, DragIndicatorRounded } from "@mui/icons-material";
 import { Tooltip, Box } from "@mui/material";
-import type { Task, UUID } from "../../types/user";
+import type { Priority, Task, UUID } from "../../types/user";
 import {
   TaskContainer,
   EmojiContainer,
@@ -171,7 +171,7 @@ export const TaskItem = memo(
 
             {task.priority && (
               <Box ml={1}>
-                <PriorityBadge priority={task.priority} />
+                <PriorityBadge priority={task.priority as Priority} />
               </Box>
             )}
 

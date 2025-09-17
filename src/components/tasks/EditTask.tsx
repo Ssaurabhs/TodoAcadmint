@@ -207,7 +207,7 @@ export const EditTask = ({ open, task, onClose }: EditTaskProps) => {
           select
           label="Priority"
           name="priority"
-          value={editedTask?.priority?.label || ""}
+          value={editedTask?.priority || ""}
           onChange={(e) => {
             const value = e.target.value;
             let priorityObj;

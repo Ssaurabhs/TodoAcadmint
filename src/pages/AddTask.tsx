@@ -1,4 +1,4 @@
-import { Category, Task } from "../types/user";
+import { Category, Priority, Task as UserTask } from "../types/user";
 import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AddTaskButton, Container, StyledInput } from "../styles";
@@ -15,7 +15,8 @@ import InputThemeProvider from "../contexts/InputThemeProvider";
 import { CategorySelect } from "../components/CategorySelect";
 import { useToasterStore } from "react-hot-toast";
 
-interface Task {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+interface _LocalTask {
   id: string;
   name: string;
   done: boolean;
@@ -120,7 +121,7 @@ const AddTask = () => {
       return; // Do not add the task if the name or description exceeds the maximum length
     }
 
-    const newTask: Task = {
+    const newTask: UserTask = {
       id: generateUUID(),
       done: false,
       pinned: false,
@@ -129,9 +130,12 @@ const AddTask = () => {
       emoji: emoji ? emoji : undefined,
       color,
       date: new Date(),
-      deadline: deadline !== "" ? deadline : undefined,
-      category: selectedCategories ? selectedCategories : [],
-      priority: selectedPriority,
+      deadline: deadline !== "" ? new Date(deadline) : undefined,
+      category: selectedCategories,
+      priority: {
+        label: selectedPriority.label as Priority["label"], // ✅ narrowed
+        color: selectedPriority.color,
+      },
     };
 
     setUser((prevUser) => ({

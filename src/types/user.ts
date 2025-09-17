@@ -37,7 +37,7 @@ export interface User {
 /**
  * Represents a task in the application.
  */
-export type Priority = "low" | "medium" | "high";
+/* export type Priority = "low" | "medium" | "high";
 
 export interface Task {
   priority: Priority;
@@ -51,7 +51,7 @@ export interface Task {
   /**
    * created at date
    */
-  date: Date;
+/*  date: Date;
   deadline?: Date;
   category?: Category[];
   lastSave?: Date;
@@ -59,12 +59,45 @@ export interface Task {
   /**
    * Optional numeric position for drag-and-drop (for p2p sync)
    */
-  position?: number;
-}
+/* position?: number;
+} */
 
 /**
  * Represents a category in the application.
  */
+/* export interface Category {
+  id: UUID;
+  name: string;
+  emoji?: string;
+  color: string;
+  lastSave?: Date;
+} */
+
+// types/user.ts
+
+export type PriorityLabel = "Critical" | "High" | "Medium";
+
+export interface Priority {
+  label: PriorityLabel;
+  color: string;
+}
+
+export interface Task {
+  id: UUID;
+  name: string;
+  done: boolean;
+  pinned: boolean;
+  color: string;
+  date: Date;
+  description?: string;
+  emoji?: string;
+  deadline?: Date;
+  category?: Category[];
+  priority?: Priority; // ✅ priority is an object, not string
+  lastSave?: Date;
+  sharedBy?: string;
+}
+
 export interface Category {
   id: UUID;
   name: string;
