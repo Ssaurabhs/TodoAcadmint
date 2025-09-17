@@ -1,8 +1,8 @@
 import { useRef, memo, useContext } from "react";
 import { Emoji } from "emoji-picker-react";
 import { DoneRounded, PushPinRounded, Link, DragIndicatorRounded } from "@mui/icons-material";
-import { Tooltip } from "@mui/material";
-import type { Task, UUID } from "../../types/user";
+import { Tooltip, Box } from "@mui/material";
+import type { Priority, Task, UUID } from "../../types/user";
 import {
   TaskContainer,
   EmojiContainer,
@@ -29,6 +29,7 @@ import { UserContext } from "../../contexts/UserContext";
 import { TaskContext } from "../../contexts/TaskContext";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
+import { PriorityBadge } from "../PriorityBadge";
 
 interface TaskItemProps {
   task: Task;
@@ -126,7 +127,7 @@ export const TaskItem = memo(
         )}
         {enableSelection && selectedIds.length > 0 && (
           <StyledRadio
-            clr={getFontColor(task.color)}
+            // clr={getFontColor(task.color)}
             checked={isSelected}
             icon={<RadioUnchecked />}
             checkedIcon={<RadioChecked />}
@@ -140,6 +141,7 @@ export const TaskItem = memo(
             tabIndex={0}
             role="checkbox"
             aria-checked={isSelected}
+            clr={""}
           />
         )}
 
@@ -166,6 +168,13 @@ export const TaskItem = memo(
           )}
           <TaskHeader>
             <TaskName done={task.done}>{textHighlighter(task.name)}</TaskName>
+
+            {task.priority && (
+              <Box ml={1}>
+                <PriorityBadge priority={task.priority as Priority} />
+              </Box>
+            )}
+
             <Tooltip
               title={
                 moveMode && enableMoveMode

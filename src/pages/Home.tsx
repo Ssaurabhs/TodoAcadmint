@@ -1,4 +1,4 @@
-import { useContext, useMemo, lazy, Suspense, useEffect } from "react";
+import { useContext, useMemo, lazy, Suspense, useEffect, useState } from "react";
 import {
   AddButton,
   GreetingHeader,
@@ -23,6 +23,16 @@ import { useNavigate } from "react-router-dom";
 import { AnimatedGreeting } from "../components/AnimatedGreeting";
 import { showToast } from "../utils";
 
+import FilterBar from "../components/FilterBar";
+
+import dayjs, { Dayjs } from "dayjs";
+import isBetween from "dayjs/plugin/isBetween";
+import isoWeek from "dayjs/plugin/isoWeek";
+
+// enable plugins once in this file
+dayjs.extend(isBetween);
+dayjs.extend(isoWeek);
+
 const TasksList = lazy(() =>
   import("../components/tasks/TasksList").then((module) => ({ default: module.TasksList })),
 );
@@ -34,6 +44,10 @@ const Home = () => {
   const isOnline = useOnlineStatus();
   const n = useNavigate();
   const isMobile = useResponsiveDisplay();
+
+  const [filterType, setFilterType] = useState<"all" | "today" | "week" | "custom">("all");
+  const [customStart, setCustomStart] = useState<Dayjs | null>(null);
+  const [customEnd, setCustomEnd] = useState<Dayjs | null>(null);
 
   useEffect(() => {
     document.title = "Todo App";
@@ -62,6 +76,39 @@ const Home = () => {
       tasksDueTodayNames: taskNamesDueToday,
     };
   }, [tasks]);
+
+  const filteredTasks = useMemo(() => {
+    if (!Array.isArray(tasks)) return [];
+
+    const today = dayjs().format("YYYY-MM-DD");
+    const startOfWeek = dayjs().startOf("isoWeek").format("YYYY-MM-DD");
+    const endOfWeek = dayjs().endOf("isoWeek").format("YYYY-MM-DD");
+
+    return tasks.filter((t) => {
+      if (!t.deadline) return filterType === "all";
+
+      const deadline = dayjs(t.deadline);
+      if (!deadline.isValid()) return false;
+
+      const deadlineDate = deadline.format("YYYY-MM-DD");
+
+      switch (filterType) {
+        case "today":
+          return deadlineDate === today;
+        case "week":
+          return deadlineDate >= startOfWeek && deadlineDate <= endOfWeek;
+        case "custom":
+          if (customStart && customEnd) {
+            const start = dayjs(customStart).format("YYYY-MM-DD");
+            const end = dayjs(customEnd).format("YYYY-MM-DD");
+            return deadlineDate >= start && deadlineDate <= end;
+          }
+          return false;
+        default:
+          return true;
+      }
+    });
+  }, [tasks, filterType, customStart, customEnd]);
 
   // Memoize time-based greeting
   const timeGreeting = useMemo(() => {
@@ -122,6 +169,16 @@ const Home = () => {
           <WifiOff /> You're offline but you can use the app!
         </Offline>
       )}
+
+      <FilterBar
+        filterType={filterType}
+        setFilterType={setFilterType}
+        customStart={customStart}
+        setCustomStart={setCustomStart}
+        customEnd={customEnd}
+        setCustomEnd={setCustomEnd}
+      />
+
       {tasks.length > 0 && settings.showProgressBar && (
         <TasksCountContainer>
           <TasksCount glow={settings.enableGlow}>
@@ -201,7 +258,7 @@ const Home = () => {
           </Box>
         }
       >
-        <TasksList />
+        <TasksList tasks={filteredTasks} />
       </Suspense>
       {!isMobile && (
         <Tooltip title={tasks.length > 0 ? "Add New Task" : "Add Task"} placement="left">

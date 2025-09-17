@@ -1,4 +1,4 @@
-import { Category, Task } from "../types/user";
+import { Category, Priority, Task as UserTask } from "../types/user";
 import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AddTaskButton, Container, StyledInput } from "../styles";
@@ -15,6 +15,24 @@ import InputThemeProvider from "../contexts/InputThemeProvider";
 import { CategorySelect } from "../components/CategorySelect";
 import { useToasterStore } from "react-hot-toast";
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+interface _LocalTask {
+  id: string;
+  name: string;
+  done: boolean;
+  deadline?: string;
+  priority: {
+    label: "Critical" | "High" | "Medium";
+    color: string;
+  };
+}
+
+const PRIORITY_OPTIONS = [
+  { label: "Critical", color: "#ef2522ff" }, // red
+  { label: "High", color: "#fb8823ff" }, // Orange
+  { label: "Medium", color: "#8e24aa" }, // purple
+];
+
 const AddTask = () => {
   const { user, setUser } = useContext(UserContext);
   const theme = useTheme();
@@ -28,6 +46,9 @@ const AddTask = () => {
   );
   const [deadline, setDeadline] = useStorageState<string>("", "deadline", "sessionStorage");
   const [nameError, setNameError] = useState<string>("");
+
+  const [selectedPriority, setSelectedPriority] = useState(PRIORITY_OPTIONS[2]); // default to Medium
+
   const [descriptionError, setDescriptionError] = useState<string>("");
   const [selectedCategories, setSelectedCategories] = useStorageState<Category[]>(
     [],
@@ -100,7 +121,7 @@ const AddTask = () => {
       return; // Do not add the task if the name or description exceeds the maximum length
     }
 
-    const newTask: Task = {
+    const newTask: UserTask = {
       id: generateUUID(),
       done: false,
       pinned: false,
@@ -110,7 +131,11 @@ const AddTask = () => {
       color,
       date: new Date(),
       deadline: deadline !== "" ? new Date(deadline) : undefined,
-      category: selectedCategories ? selectedCategories : [],
+      category: selectedCategories,
+      priority: {
+        label: selectedPriority.label as Priority["label"], // ✅ narrowed
+        color: selectedPriority.color,
+      },
     };
 
     setUser((prevUser) => ({
@@ -224,6 +249,34 @@ const AddTask = () => {
             </div>
           )}
         </InputThemeProvider>
+
+        <div style={{ marginBottom: "14px" }}>
+          <label style={{ display: "block", marginBottom: "6px", fontWeight: "bold" }}>
+            Priority
+          </label>
+          <select
+            value={selectedPriority.label}
+            onChange={(e) => {
+              const newPriority = PRIORITY_OPTIONS.find((p) => p.label === e.target.value);
+              if (newPriority) setSelectedPriority(newPriority);
+            }}
+            style={{
+              width: "400px",
+              padding: "16px",
+              borderRadius: "10px",
+              border: "0.5px solid #ccc",
+              backgroundColor: selectedPriority.color,
+              color: getFontColor(selectedPriority.color),
+            }}
+          >
+            {PRIORITY_OPTIONS.map((priority) => (
+              <option key={priority.label} value={priority.label}>
+                {priority.label}
+              </option>
+            ))}
+          </select>
+        </div>
+
         <ColorPicker
           color={color}
           width="400px"
