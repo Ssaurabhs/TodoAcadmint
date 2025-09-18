@@ -16,7 +16,7 @@ import { ColorPicker, CustomDialogTitle, CustomEmojiPicker } from "..";
 import { DESCRIPTION_MAX_LENGTH, TASK_NAME_MAX_LENGTH } from "../../constants";
 import { UserContext } from "../../contexts/UserContext";
 import { DialogBtn } from "../../styles";
-import { Category, Task } from "../../types/user";
+import { Category, Task, Priority } from "../../types/user";
 import { formatDate, showToast, timeAgo } from "../../utils";
 import { useTheme } from "@emotion/react";
 import { ColorPalette } from "../../theme/themeConfig";
@@ -207,10 +207,10 @@ export const EditTask = ({ open, task, onClose }: EditTaskProps) => {
           select
           label="Priority"
           name="priority"
-          value={editedTask?.priority || ""}
+          value={editedTask?.priority?.label || ""}
           onChange={(e) => {
-            const value = e.target.value;
-            let priorityObj;
+            const value = e.target.value as Priority["label"];
+            let priorityObj: Priority | undefined;
 
             if (value === "Critical") priorityObj = { label: "Critical", color: "#ef2522ff" };
             if (value === "High") priorityObj = { label: "High", color: "#fb8823ff" };

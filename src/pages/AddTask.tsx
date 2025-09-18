@@ -15,8 +15,7 @@ import InputThemeProvider from "../contexts/InputThemeProvider";
 import { CategorySelect } from "../components/CategorySelect";
 import { useToasterStore } from "react-hot-toast";
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-interface _LocalTask {
+export interface LocalTask {
   id: string;
   name: string;
   done: boolean;

@@ -96,6 +96,7 @@ export interface Task {
   priority?: Priority; // ✅ priority is an object, not string
   lastSave?: Date;
   sharedBy?: string;
+  position?: number; // Optional numeric position for drag-and-drop (for p2p sync)
 }
 
 export interface Category {
