@@ -297,7 +297,7 @@ export const ProfileSidebar = () => {
 
         <StyledDivider />
 
-        <MenuLink to="https://github.com/maciekt07/TodoApp">
+        <MenuLink to="https://github.com/Ssaurabhs/TodoAcadmint">
           <StyledMenuItem translate="no">
             <GitHub className="GitHubIcon" /> &nbsp; Github{" "}
             {stars && (
@@ -313,7 +313,7 @@ export const ProfileSidebar = () => {
           </StyledMenuItem>
         </MenuLink>
 
-        <MenuLink to="https://github.com/maciekt07/TodoApp/issues/new">
+        <MenuLink to="https://github.com/Ssaurabhs/TodoAcadmint/issues">
           <StyledMenuItem>
             <BugReportRounded className="BugReportRoundedIcon" /> &nbsp; Report Issue{" "}
             {Boolean(issuesCount || issuesCount === 0) && (
